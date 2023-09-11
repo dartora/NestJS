@@ -2,15 +2,16 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
-import { Post } from './posts/entities/post.entity';
-import { Comment } from './comments/entities/comment.entity';
-
+import { UsersModule } from './user/user.module';
+import { User } from './user/entities/user.entity';
+import { Post } from './post/entities/post.entity';
+import { Comment } from './comment/entities/comment.entity';
 
 import { ConfigModule } from '@nestjs/config';
-import * as fs from 'fs';
 import { AuthModule } from './auth/auth.module';
+import { PostModule } from './post/post.module';
+import { CommentModule } from './comment/comment.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -34,6 +35,8 @@ import { AuthModule } from './auth/auth.module';
     }),
     UsersModule,
     AuthModule,
+    PostModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

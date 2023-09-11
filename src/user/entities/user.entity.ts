@@ -1,11 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Post } from '../../posts/entities/post.entity';
+import { Post } from '../../post/entities/post.entity';
 
 @Entity()
 export class User {
-  /**
-   * this decorator will help to auto generate id for the table.
-   */
+
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,8 +29,6 @@ export class User {
    * u - unspecified
    */
   gender: string;
-
-
 
   @OneToMany(() => Post, (post) => post.user)
   posts: Post[];

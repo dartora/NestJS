@@ -9,38 +9,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Post = void 0;
+exports.Comment = void 0;
 const openapi = require("@nestjs/swagger");
 const typeorm_1 = require("typeorm");
-const user_entity_1 = require("../../user/entities/user.entity");
-const comment_entity_1 = require("../../comment/entities/comment.entity");
-let Post = class Post {
+const post_entity_1 = require("../../post/entities/post.entity");
+let Comment = class Comment {
     static _OPENAPI_METADATA_FACTORY() {
-        return { id: { required: true, type: () => Number }, title: { required: true, type: () => String }, body: { required: true, type: () => String }, user: { required: true, type: () => require("../../user/entities/user.entity").User }, comments: { required: true, type: () => [require("../../comment/entities/comment.entity").Comment] } };
+        return { id: { required: true, type: () => Number }, name: { required: true, type: () => String }, email: { required: true, type: () => String }, body: { required: true, type: () => String }, post: { required: true, type: () => require("../../post/entities/post.entity").Post } };
     }
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     __metadata("design:type", Number)
-], Post.prototype, "id", void 0);
+], Comment.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Post.prototype, "title", void 0);
+], Comment.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Post.prototype, "body", void 0);
+], Comment.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.posts),
-    __metadata("design:type", user_entity_1.User)
-], Post.prototype, "user", void 0);
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Comment.prototype, "body", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => comment_entity_1.Comment, (comment) => comment.post),
-    __metadata("design:type", Array)
-], Post.prototype, "comments", void 0);
-Post = __decorate([
+    (0, typeorm_1.ManyToOne)(() => post_entity_1.Post, (post) => post.comments),
+    __metadata("design:type", post_entity_1.Post)
+], Comment.prototype, "post", void 0);
+Comment = __decorate([
     (0, typeorm_1.Entity)()
-], Post);
-exports.Post = Post;
-//# sourceMappingURL=post.entity.js.map
+], Comment);
+exports.Comment = Comment;
+//# sourceMappingURL=comment.entity.js.map

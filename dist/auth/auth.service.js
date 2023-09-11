@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authService = exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../users/users.service");
+const user_service_1 = require("../user/user.service");
 const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
     constructor(usersService, jwtService) {
@@ -31,7 +31,7 @@ let AuthService = class AuthService {
 };
 AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService,
+    __metadata("design:paramtypes", [user_service_1.UsersService,
         jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;

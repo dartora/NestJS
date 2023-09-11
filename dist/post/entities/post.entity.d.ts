@@ -1,9 +1,9 @@
-import { User } from '../../users/entities/user.entity';
-import { Comment } from './Comment';
+import { User } from '../../user/entities/user.entity';
+import { Comment } from '../../comment/entities/comment.entity';
 export declare class Post {
     id: number;
-    user: User;
     title: string;
     body: string;
+    user: User;
     comments: Comment[];
 }

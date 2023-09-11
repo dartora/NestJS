@@ -11,12 +11,14 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
-const users_module_1 = require("./users/users.module");
-const user_entity_1 = require("./users/entities/user.entity");
-const post_entity_1 = require("./posts/entities/post.entity");
-const comment_entity_1 = require("./comments/entities/comment.entity");
+const user_module_1 = require("./user/user.module");
+const user_entity_1 = require("./user/entities/user.entity");
+const post_entity_1 = require("./post/entities/post.entity");
+const comment_entity_1 = require("./comment/entities/comment.entity");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
+const post_module_1 = require("./post/post.module");
+const comment_module_1 = require("./comment/comment.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -41,8 +43,10 @@ AppModule = __decorate([
                     key: process.env.POSTGRES_KEY || '',
                 },
             }),
-            users_module_1.UsersModule,
+            user_module_1.UsersModule,
             auth_module_1.AuthModule,
+            post_module_1.PostModule,
+            comment_module_1.CommentModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

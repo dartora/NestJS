@@ -4,6 +4,10 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
+import { Post } from './posts/entities/post.entity';
+import { Comment } from './comments/entities/comment.entity';
+
+
 import { ConfigModule } from '@nestjs/config';
 import * as fs from 'fs';
 import { AuthModule } from './auth/auth.module';
@@ -16,11 +20,11 @@ import { AuthModule } from './auth/auth.module';
       port: 5432,
       password: process.env.POSTGRES_PASSWORD,
       username: process.env.POSTGRES_USER,
-      entities: [User],
+      entities: [User, Post, Comment],
       database: process.env.POSTGRES_DATABASE,
       synchronize: true,
-      logging: true,      
-      autoLoadEntities: true,      
+      logging: true,
+      autoLoadEntities: true,
       ssl: {
         rejectUnauthorized: false, // Set this to true if you want to verify the server's certificate (recommended for production)
         ca: process.env.POSTGRES_CA || '', // Provide the path to your CA certificate (optional)

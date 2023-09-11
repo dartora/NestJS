@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./users/users.module");
 const user_entity_1 = require("./users/entities/user.entity");
+const post_entity_1 = require("./posts/entities/post.entity");
+const comment_entity_1 = require("./comments/entities/comment.entity");
 const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
@@ -27,7 +29,7 @@ AppModule = __decorate([
                 port: 5432,
                 password: process.env.POSTGRES_PASSWORD,
                 username: process.env.POSTGRES_USER,
-                entities: [user_entity_1.User],
+                entities: [user_entity_1.User, post_entity_1.Post, comment_entity_1.Comment],
                 database: process.env.POSTGRES_DATABASE,
                 synchronize: true,
                 logging: true,

@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePostDto = void 0;
 const openapi = require("@nestjs/swagger");
-const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreatePostDto {
     static _OPENAPI_METADATA_FACTORY() {
@@ -19,7 +18,6 @@ class CreatePostDto {
     }
 }
 __decorate([
-    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -30,7 +28,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePostDto.prototype, "body", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)

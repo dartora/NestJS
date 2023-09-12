@@ -12,23 +12,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdatePostDto = void 0;
 const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
+const create_post_dto_1 = require("./create-post.dto");
 const class_validator_1 = require("class-validator");
-class UpdatePostDto {
+class UpdatePostDto extends (0, swagger_1.PartialType)(create_post_dto_1.CreatePostDto) {
     static _OPENAPI_METADATA_FACTORY() {
-        return { title: { required: true, type: () => String }, body: { required: true, type: () => String }, userId: { required: true, type: () => Number } };
+        return { userId: { required: true, type: () => Number } };
     }
 }
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdatePostDto.prototype, "title", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdatePostDto.prototype, "body", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     (0, class_validator_1.IsNotEmpty)(),

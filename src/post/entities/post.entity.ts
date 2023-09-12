@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { User } from '../../user/entities/user.entity';
 import { Comment } from '../../comment/entities/comment.entity';
 
@@ -13,8 +13,12 @@ export class Post {
   @Column()
   body: string;
 
-  @ManyToOne(() => User, (user) => user.posts)
-  user: User;
+
+  @Column()
+  userId: number;
+
+  @ManyToOne(() => User) // This defines the Many-to-One relationship
+  user: User; // This property holds the reference to the associated User
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Comment[];

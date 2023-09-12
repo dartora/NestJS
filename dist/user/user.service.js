@@ -32,7 +32,7 @@ let UsersService = class UsersService {
         return this.userRepository.save(user);
     }
     findAllUsers() {
-        return this.userRepository.find();
+        return this.userRepository.find({ relations: ['posts'] });
     }
     viewUser(id) {
         return this.userRepository.findOneBy({ id });

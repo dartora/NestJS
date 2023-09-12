@@ -42,7 +42,7 @@ let PostController = class PostController {
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)(),
-    openapi.ApiResponse({ status: 201, type: String }),
+    openapi.ApiResponse({ status: 201, type: require("./entities/post.entity").Post }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_post_dto_1.CreatePostDto]),
@@ -50,7 +50,7 @@ __decorate([
 ], PostController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    openapi.ApiResponse({ status: 200, type: String }),
+    openapi.ApiResponse({ status: 200, type: [require("./entities/post.entity").Post] }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

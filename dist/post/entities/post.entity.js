@@ -16,7 +16,7 @@ const user_entity_1 = require("../../user/entities/user.entity");
 const comment_entity_1 = require("../../comment/entities/comment.entity");
 let Post = class Post {
     static _OPENAPI_METADATA_FACTORY() {
-        return { id: { required: true, type: () => Number }, title: { required: true, type: () => String }, body: { required: true, type: () => String }, user: { required: true, type: () => require("../../user/entities/user.entity").User }, comments: { required: true, type: () => [require("../../comment/entities/comment.entity").Comment] } };
+        return { id: { required: true, type: () => Number }, title: { required: true, type: () => String }, body: { required: true, type: () => String }, userId: { required: true, type: () => Number }, user: { required: true, type: () => require("../../user/entities/user.entity").User }, comments: { required: true, type: () => [require("../../comment/entities/comment.entity").Comment] } };
     }
 };
 __decorate([
@@ -32,7 +32,11 @@ __decorate([
     __metadata("design:type", String)
 ], Post.prototype, "body", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entity_1.User, (user) => user.posts),
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Number)
+], Post.prototype, "userId", void 0);
+__decorate([
+    (0, typeorm_1.ManyToOne)(() => user_entity_1.User),
     __metadata("design:type", user_entity_1.User)
 ], Post.prototype, "user", void 0);
 __decorate([

@@ -9,7 +9,7 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   createUser(createUserDto: CreateUserDto): Promise<User> {
     const user: User = new User();
@@ -23,7 +23,7 @@ export class UsersService {
   }
 
   findAllUsers(): Promise<User[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({ relations: ['posts'] });
   }
 
   viewUser(id: number): Promise<User> {

@@ -1,7 +1,7 @@
 # Project Title
 
 Currently this is a blank template of NestJS deployed on vercel with postgres database on vercel too...
-Then, we are bring all portfolio to deployed automated way with continous delivery!
+Then, we are bring all portfolio to be deployed automated way with continuous delivery!
 
 ## Stack
 NestJS

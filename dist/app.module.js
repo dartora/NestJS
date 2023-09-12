@@ -19,6 +19,7 @@ const config_1 = require("@nestjs/config");
 const auth_module_1 = require("./auth/auth.module");
 const post_module_1 = require("./post/post.module");
 const comment_module_1 = require("./comment/comment.module");
+const core_1 = require("@nestjs/core");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -49,7 +50,12 @@ AppModule = __decorate([
             comment_module_1.CommentModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService,
+            {
+                provide: core_1.APP_PIPE,
+                useClass: common_1.ValidationPipe,
+            },
+        ],
     })
 ], AppModule);
 exports.AppModule = AppModule;

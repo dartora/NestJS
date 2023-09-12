@@ -36,7 +36,7 @@ let UsersController = class UsersController {
         return this.userService.viewUser(+id);
     }
     update(id, updateUserDto) {
-        return this.userService.updateUser(+id, updateUserDto);
+        return this.userService.updateUser(id, updateUserDto);
     }
     remove(id) {
         return this.userService.removeUser(+id);
@@ -82,7 +82,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_user_dto_1.UpdateUserDto]),
+    __metadata("design:paramtypes", [Number, update_user_dto_1.UpdateUserDto]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "update", null);
 __decorate([

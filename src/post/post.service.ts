@@ -28,7 +28,7 @@ export class PostService {
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
-    return this.postRepository.update(id, updatePostDto);
+    return this.postRepository.save(updatePostDto);
   }
 
   remove(id: number) {

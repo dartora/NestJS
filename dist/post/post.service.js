@@ -34,7 +34,7 @@ let PostService = class PostService {
         return `This action returns a #${id} post`;
     }
     update(id, updatePostDto) {
-        return this.postRepository.update(id, updatePostDto);
+        return this.postRepository.save(updatePostDto);
     }
     remove(id) {
         return `This action removes a #${id} post`;

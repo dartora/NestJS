@@ -33,7 +33,7 @@ let PostController = class PostController {
         return this.postService.findOne(+id);
     }
     update(id, updatePostDto) {
-        return this.postService.update(+id, updatePostDto);
+        return this.postService.update(id, updatePostDto);
     }
     remove(id) {
         return this.postService.remove(+id);
@@ -66,11 +66,11 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Patch)(':id'),
-    openapi.ApiResponse({ status: 200 }),
+    openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_post_dto_1.UpdatePostDto]),
+    __metadata("design:paramtypes", [Number, update_post_dto_1.UpdatePostDto]),
     __metadata("design:returntype", void 0)
 ], PostController.prototype, "update", null);
 __decorate([

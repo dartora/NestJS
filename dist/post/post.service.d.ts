@@ -10,6 +10,6 @@ export declare class PostService {
     create(createPostDto: CreatePostDto): Promise<Post>;
     findAll(): Promise<Post[]>;
     findOne(id: number): string;
-    update(id: number, updatePostDto: UpdatePostDto): Promise<import("typeorm").UpdateResult>;
+    update(id: number, updatePostDto: UpdatePostDto): Promise<UpdatePostDto & Post>;
     remove(id: number): string;
 }

@@ -7,6 +7,6 @@ export declare class PostController {
     create(createPostDto: CreatePostDto): Promise<import("./entities/post.entity").Post>;
     findAll(): Promise<import("./entities/post.entity").Post[]>;
     findOne(id: string): string;
-    update(id: string, updatePostDto: UpdatePostDto): Promise<import("typeorm").UpdateResult>;
+    update(id: number, updatePostDto: UpdatePostDto): Promise<UpdatePostDto & import("./entities/post.entity").Post>;
     remove(id: string): string;
 }

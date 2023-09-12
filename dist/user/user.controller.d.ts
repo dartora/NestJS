@@ -9,7 +9,7 @@ export declare class UsersController {
     findAll(): Promise<User[]>;
     findAllUsersWithPosts(): Promise<User[]>;
     findOne(id: string): Promise<User>;
-    update(id: string, updateUserDto: UpdateUserDto): Promise<any>;
+    update(id: number, updateUserDto: UpdateUserDto): Promise<any>;
     remove(id: string): Promise<{
         affected?: number;
     }>;

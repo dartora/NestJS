@@ -20,7 +20,7 @@ export class PostService {
   }
 
   findAll() {
-    return this.postRepository.find({ relations: ['user'] });
+    return this.postRepository.find();
   }
 
   findOne(id: number) {

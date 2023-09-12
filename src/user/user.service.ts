@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { Post } from 'src/post/entities/post.entity';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +24,33 @@ export class UsersService {
   }
 
   findAllUsers(): Promise<User[]> {
-    return this.userRepository.find({ relations: ['posts'] });
+    return this.userRepository.find();
+  }
+
+  async findAllUsersWithPosts(): Promise<UserResponse[]> {
+    const usersWithPosts = await this.userRepository.find({ relations: ['posts'] });
+
+    // Assuming UserResponse is a type representing the desired response structure
+    const userResponses: UserResponse[] = usersWithPosts.map(user => {
+      return {
+        id: user.id,
+        name: user.name,
+        age: user.age,
+        gender: user.gender,
+        username: user.username,
+        email: user.email,
+        posts: user.posts.map(post => ({
+          id: post.id,
+          title: post.title,
+          body: post.body,
+          userId: post.userId,
+          comments: post.comments,
+          user: post.user
+        })),
+      };
+    });
+
+    return userResponses;
   }
 
   viewUser(id: number): Promise<User> {
@@ -50,4 +77,13 @@ export class UsersService {
       (user) => user.username === username,
     );
   }
+}
+export interface UserResponse {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  age: number;
+  gender: string;
+  posts: Post[]
 }

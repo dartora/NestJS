@@ -29,6 +29,9 @@ let UsersController = class UsersController {
     findAll() {
         return this.userService.findAllUsers();
     }
+    async findAllUsersWithPosts() {
+        return await this.userService.findAllUsersWithPosts();
+    }
     findOne(id) {
         return this.userService.viewUser(+id);
     }
@@ -55,6 +58,14 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.Get)('/posts'),
+    openapi.ApiResponse({ status: 200, type: [Object] }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UsersController.prototype, "findAllUsersWithPosts", null);
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)(':id'),

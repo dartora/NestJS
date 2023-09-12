@@ -28,7 +28,7 @@ let PostService = class PostService {
         return this.postRepository.save(createPostDto);
     }
     findAll() {
-        return this.postRepository.find({ relations: ['user'] });
+        return this.postRepository.find();
     }
     findOne(id) {
         return `This action returns a #${id} post`;

@@ -32,7 +32,29 @@ let UsersService = class UsersService {
         return this.userRepository.save(user);
     }
     findAllUsers() {
-        return this.userRepository.find({ relations: ['posts'] });
+        return this.userRepository.find();
+    }
+    async findAllUsersWithPosts() {
+        const usersWithPosts = await this.userRepository.find({ relations: ['posts'] });
+        const userResponses = usersWithPosts.map(user => {
+            return {
+                id: user.id,
+                name: user.name,
+                age: user.age,
+                gender: user.gender,
+                username: user.username,
+                email: user.email,
+                posts: user.posts.map(post => ({
+                    id: post.id,
+                    title: post.title,
+                    body: post.body,
+                    userId: post.userId,
+                    comments: post.comments,
+                    user: post.user
+                })),
+            };
+        });
+        return userResponses;
     }
     viewUser(id) {
         return this.userRepository.findOneBy({ id });

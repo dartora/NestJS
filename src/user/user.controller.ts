@@ -8,7 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from './user.service';
+import { UsersService, UserResponse } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -27,6 +27,13 @@ export class UsersController {
   findAll() {
     return this.userService.findAllUsers();
   }
+
+  @UseGuards(AuthGuard)
+  @Get('/posts')
+  async findAllUsersWithPosts(): Promise<UserResponse[]> {
+    return await this.userService.findAllUsersWithPosts();
+  }
+
 
   @UseGuards(AuthGuard)
   @Get(':id')

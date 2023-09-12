@@ -61,7 +61,7 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)('/posts'),
-    openapi.ApiResponse({ status: 200, type: [Object] }),
+    openapi.ApiResponse({ status: 200, type: [require("./entities/user.entity").User] }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -78,7 +78,7 @@ __decorate([
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Patch)(':id'),
-    openapi.ApiResponse({ status: 200, type: require("./entities/user.entity").User }),
+    openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),

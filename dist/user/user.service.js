@@ -22,52 +22,29 @@ let UsersService = class UsersService {
         this.userRepository = userRepository;
     }
     createUser(createUserDto) {
-        const user = new user_entity_1.User();
-        user.name = createUserDto.name;
-        user.age = createUserDto.age;
-        user.email = createUserDto.email;
-        user.username = createUserDto.username;
-        user.password = createUserDto.password;
-        user.gender = createUserDto.gender;
-        return this.userRepository.save(user);
+        return this.userRepository.save(createUserDto);
     }
     findAllUsers() {
         return this.userRepository.find();
     }
     async findAllUsersWithPosts() {
-        const usersWithPosts = await this.userRepository.find({ relations: ['posts'] });
-        const userResponses = usersWithPosts.map(user => {
-            return {
-                id: user.id,
-                name: user.name,
-                age: user.age,
-                gender: user.gender,
-                username: user.username,
-                email: user.email,
-                posts: user.posts.map(post => ({
-                    id: post.id,
-                    title: post.title,
-                    body: post.body,
-                    userId: post.userId,
-                    comments: post.comments,
-                    user: post.user
-                })),
-            };
+        return await this.userRepository.find({
+            relations: ['posts'],
+            select: [
+                'id',
+                'name',
+                'age',
+                'gender',
+                'username',
+                'email'
+            ]
         });
-        return userResponses;
     }
     viewUser(id) {
         return this.userRepository.findOneBy({ id });
     }
-    updateUser(id, updateUserDto) {
-        const user = new user_entity_1.User();
-        user.name = updateUserDto.name;
-        user.age = updateUserDto.age;
-        user.email = updateUserDto.email;
-        user.username = updateUserDto.username;
-        user.password = updateUserDto.password;
-        user.id = id;
-        return this.userRepository.save(user);
+    async updateUser(id, updateUserDto) {
+        return this.userRepository.update(id, updateUserDto);
     }
     removeUser(id) {
         return this.userRepository.delete(id);

@@ -1,4 +1,4 @@
-import { Post } from "../../post/entities/post.entity";
+import { Post } from '../../post/entities/post.entity';
 export declare class User {
     id: number;
     name: string;
@@ -7,5 +7,5 @@ export declare class User {
     age: number;
     password: string;
     gender: string;
-    posts?: Post[];
+    posts: Post[];
 }

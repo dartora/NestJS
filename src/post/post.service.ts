@@ -1,21 +1,21 @@
-import { Injectable } from "@nestjs/common";
-import { CreatePostDto } from "./dto/create-post.dto";
-import { UpdatePostDto } from "./dto/update-post.dto";
-import { Repository } from "typeorm";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Post } from "./entities/post.entity";
-import { User } from "src/user/entities/user.entity";
-import { UsersService } from "src/user/user.service";
+import { Injectable } from '@nestjs/common';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Post } from './entities/post.entity';
+import { User } from '../user/entities/user.entity';
+import { UsersService } from '../user/user.service';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectRepository(Post) private readonly postRepository: Repository<Post>,
-    @InjectRepository(User) private readonly userRepository: Repository<User>
-  ) {}
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) { }
 
   async create(createPostDto: CreatePostDto): Promise<Post> {
-    console.log(createPostDto);
+    console.log(createPostDto)
     return this.postRepository.save(createPostDto);
   }
 

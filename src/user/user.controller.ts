@@ -7,16 +7,16 @@ import {
   Param,
   Delete,
   UseGuards,
-} from '@nestjs/common';
-import { UsersService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { AuthGuard } from 'src/auth/auth.guard';
-import { User } from './entities/user.entity';
+} from "@nestjs/common";
+import { UsersService } from "./user.service";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { AuthGuard } from "../auth/auth.guard";
+import { User } from "./entities/user.entity";
 
-@Controller('users')
+@Controller("users")
 export class UsersController {
-  constructor(private readonly userService: UsersService) { }
+  constructor(private readonly userService: UsersService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -30,27 +30,26 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/posts')
+  @Get("/posts")
   async findAllUsersWithPosts(): Promise<User[]> {
     return await this.userService.findAllUsersWithPosts();
   }
 
-
   @UseGuards(AuthGuard)
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.userService.viewUser(+id);
   }
 
   @UseGuards(AuthGuard)
-  @Patch(':id')
-  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+  @Patch(":id")
+  update(@Param("id") id: number, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.updateUser(id, updateUserDto);
   }
 
   @UseGuards(AuthGuard)
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.userService.removeUser(+id);
   }
 }

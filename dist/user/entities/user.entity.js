@@ -15,7 +15,7 @@ const typeorm_1 = require("typeorm");
 const post_entity_1 = require("../../post/entities/post.entity");
 let User = class User {
     static _OPENAPI_METADATA_FACTORY() {
-        return { id: { required: true, type: () => Number }, name: { required: true, type: () => String }, username: { required: true, type: () => String }, email: { required: true, type: () => String }, age: { required: true, type: () => Number }, password: { required: true, type: () => String }, gender: { required: true, type: () => String }, posts: { required: true, type: () => [require("../../post/entities/post.entity").Post] } };
+        return { id: { required: true, type: () => Number }, name: { required: true, type: () => String }, username: { required: true, type: () => String }, email: { required: true, type: () => String }, age: { required: true, type: () => Number }, password: { required: true, type: () => String }, gender: { required: true, type: () => String }, posts: { required: false, type: () => [require("../../post/entities/post.entity").Post] } };
     }
 };
 __decorate([
@@ -23,27 +23,27 @@ __decorate([
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 30 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 30 }),
     __metadata("design:type", String)
 ], User.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 15 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 15 }),
     __metadata("design:type", String)
 ], User.prototype, "username", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar', length: 40 }),
+    (0, typeorm_1.Column)({ type: "varchar", length: 40 }),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'int' }),
+    (0, typeorm_1.Column)({ type: "int" }),
     __metadata("design:type", Number)
 ], User.prototype, "age", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'varchar' }),
+    (0, typeorm_1.Column)({ type: "varchar" }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'enum', enum: ['m', 'f', 'u'] }),
+    (0, typeorm_1.Column)({ type: "enum", enum: ["m", "f", "u"] }),
     __metadata("design:type", String)
 ], User.prototype, "gender", void 0);
 __decorate([

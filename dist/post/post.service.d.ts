@@ -1,8 +1,8 @@
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
-import { Repository } from 'typeorm';
-import { Post } from './entities/post.entity';
-import { User } from 'src/user/entities/user.entity';
+import { CreatePostDto } from "./dto/create-post.dto";
+import { UpdatePostDto } from "./dto/update-post.dto";
+import { Repository } from "typeorm";
+import { Post } from "./entities/post.entity";
+import { User } from "src/user/entities/user.entity";
 export declare class PostService {
     private readonly postRepository;
     private readonly userRepository;

@@ -31,5 +31,5 @@ export class User {
   gender: string;
 
   @OneToMany(() => Post, (post) => post.user)
-  posts: Post[];
+  posts?: Post[];
 }

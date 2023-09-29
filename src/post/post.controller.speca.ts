@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostController } from './post.controller';
 import { PostService } from './post.service';
+import { JwtModule } from '@nestjs/jwt';
 
 describe('PostController', () => {
   let controller: PostController;
@@ -9,6 +10,7 @@ describe('PostController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PostController],
       providers: [PostService],
+      imports: [JwtModule]
     }).compile();
 
     controller = module.get<PostController>(PostController);

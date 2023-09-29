@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CommentController } from './comment.controller';
 import { CommentService } from './comment.service';
+import { JwtModule } from '@nestjs/jwt';
 
 describe('CommentController', () => {
   let controller: CommentController;
@@ -9,6 +10,7 @@ describe('CommentController', () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CommentController],
       providers: [CommentService],
+      imports: [JwtModule]
     }).compile();
 
     controller = module.get<CommentController>(CommentController);

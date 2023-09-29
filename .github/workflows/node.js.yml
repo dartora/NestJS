@@ -13,17 +13,35 @@ jobs:
 
     strategy:
       matrix:
+<<<<<<< HEAD
         node-version: [ 16, 18]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+=======
+        node-version: [14, 16, 18]
+>>>>>>> adddb835 (Update node.js.yml)
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+
+    - name: Setup Node.js and pnpm
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
+<<<<<<< HEAD
         cache: 'npm'
     # - run: npm ci
     # - run: npm run build --if-present
     - run: npm i  
     - run: npm test
+=======
+        cache: 'pnpm'
+
+    - run: npm install -g pnpm
+      # Install pnpm globally
+
+    - run: pnpm install
+      # Use pnpm to install dependencies
+
+    - run: pnpm run build --if-present
+     
+>>>>>>> adddb835 (Update node.js.yml)

@@ -12,35 +12,18 @@ import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { APP_PIPE } from '@nestjs/core';
+import { DatabaseModule } from '../infra/database/database.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: 5432,
-      password: process.env.POSTGRES_PASSWORD,
-      username: process.env.POSTGRES_USER,
-      entities: [User, Post, Comment],
-      database: process.env.POSTGRES_DATABASE,
-      synchronize: true,
-      logging: true,
-      autoLoadEntities: true,
-      ssl: {
-        rejectUnauthorized: false, // Set this to true if you want to verify the server's certificate (recommended for production)
-        ca: process.env.POSTGRES_CA || '', // Provide the path to your CA certificate (optional)
-        cert: process.env.POSTGRES_CERT || '', // Provide the path to your client certificate (optional)
-        key: process.env.POSTGRES_KEY || '', // Provide the path to your client private key (optional)
-      },
-    }),
+    DatabaseModule,
     UsersModule,
     AuthModule,
     PostModule,
     CommentModule,
   ],
   controllers: [AppController],
-  // providers: [AppService],
   providers: [AppService,
     {
       provide: APP_PIPE,

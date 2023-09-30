@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from '../user/user.module';
-import { UsersService } from 'src/user/user.service';
+import { UsersService } from '../user/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '../user/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from 'src/auth/constants';
+import { jwtConstants } from '../auth/constants';
 
 @Module({
   imports: [

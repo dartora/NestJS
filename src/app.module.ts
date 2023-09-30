@@ -40,7 +40,6 @@ import { APP_PIPE } from '@nestjs/core';
     CommentModule,
   ],
   controllers: [AppController],
-  // providers: [AppService],
   providers: [AppService,
     {
       provide: APP_PIPE,

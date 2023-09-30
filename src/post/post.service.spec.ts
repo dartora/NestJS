@@ -26,6 +26,7 @@ describe('PostService', () => {
     expect(postService).toBeDefined();
     expect(postRepository).toBeDefined();
   });
+
   describe('findAllPosts', () => {
     it('should return an array of posts', async () => {
       const posts = [

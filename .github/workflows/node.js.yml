@@ -24,5 +24,5 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: rm -rf package-lock.json
-    - run: npm i --legacy-peer-deps
+    - run: npm i
     - run: npm test

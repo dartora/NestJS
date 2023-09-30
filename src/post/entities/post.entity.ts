@@ -21,5 +21,5 @@ export class Post {
   user: User; // This property holds the reference to the associated User
 
   @OneToMany(() => Comment, (comment) => comment.post)
-  comments: Comment[];
+  comments?: Comment[];
 }

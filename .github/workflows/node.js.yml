@@ -13,22 +13,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 16, 18]
+        node-version: [16, 18]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
-
-    - name: Setup Node.js and pnpm
-      uses: actions/setup-node@v2
+    - name: Use Nodejs ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-
-    - run: npm install -g pnpm
-      # Install pnpm globally
-
-    - run: pnpm install
-      # Use pnpm to install dependencies
-
-    - run: pnpm run build --if-present
-     
+        cache: 'npm'
+    - run: rm -rf package-lock.json
+    - run: npm i --legacy-peer-deps
+    - run: npm test

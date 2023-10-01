@@ -24,6 +24,7 @@
     "@nestjs/jwt": "^10.1.1",
     "@nestjs/mapped-types": "^2.0.2",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.1.10",
     "@nestjs/typeorm": "^10.0.0",
     "class-transformer": "^0.5.1",

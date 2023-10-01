@@ -15,7 +15,9 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
+  const swaggerRoute = process.env.NODE_ENV === 'production' ? '/swagger' : '/api/swagger';
+
+  SwaggerModule.setup(swaggerRoute, app, document);
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);

@@ -17,8 +17,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   const swaggerRoute = process.env.NODE_ENV === 'production' ? '/swagger' : '/api/swagger';
 
-  SwaggerModule.setup(swaggerRoute, app, document);
-
+  SwaggerModule.setup(swaggerRoute, app, document, { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.9.0/swagger-ui.min.css' });
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }

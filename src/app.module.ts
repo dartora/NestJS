@@ -6,13 +6,12 @@ import { UsersModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { Post } from './post/entities/post.entity';
 import { Comment } from './comment/entities/comment.entity';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { APP_PIPE } from '@nestjs/core';
-import { join } from 'path';
+import * as cors from 'cors';
 
 @Module({
   imports: [
@@ -39,10 +38,7 @@ import { join } from 'path';
     AuthModule,
     PostModule,
     CommentModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'swagger-static'),
-      serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
-    }),
+
   ],
   controllers: [AppController],
   providers: [AppService,
@@ -52,4 +48,12 @@ import { join } from 'path';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(app) {
+    app.use(
+      cors({
+        origin: 'https://nest-js-wine.vercel.app/', // Replace with your Vercel app URL
+      }),
+    );
+  }
+}

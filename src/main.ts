@@ -15,7 +15,7 @@ async function bootstrap() {
     .addTag('studies')
     .build();
 
-  const options = { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.css' };
+  //const options = { customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.18.3/swagger-ui.css' };
   const document = SwaggerModule.createDocument(app, config);
   app.use("/", swaggerUI.serve, swaggerUI.setup(document));
 

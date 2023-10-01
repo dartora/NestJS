@@ -19,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('/swagger', app, document);
 
   await app.listen(process.env.PORT || 3000);
-
+  app.enableCors()
   // get the swagger json file (if app is running in development mode)
   if (process.env.NODE_ENV === 'development') {
     let serverUrl = 'https://nest-js-wine.vercel.app/'
@@ -31,6 +31,8 @@ async function bootstrap() {
       console.log(
         `Swagger UI bundle file written to: '/swagger-static/swagger-ui-bundle.js'`,
       );
+    }).on('error', function (err) {
+      console.log('Error loading swagger-ui-bundle.js:', err);
     });
 
     get(`${serverUrl}/swagger/swagger-ui-init.js`, function (response) {
@@ -38,6 +40,8 @@ async function bootstrap() {
       console.log(
         `Swagger UI init file written to: '/swagger-static/swagger-ui-init.js'`,
       );
+    }).on('error', function (err) {
+      console.log('Error loading swagger-ui-init.js:', err);
     });
 
     get(
@@ -49,6 +53,8 @@ async function bootstrap() {
         console.log(
           `Swagger UI standalone preset file written to: '/swagger-static/swagger-ui-standalone-preset.js'`,
         );
+      }).on('error', function (err) {
+        console.log('Error loading swagger-ui-standalone-preset.js:', err);
       });
 
     get(`${serverUrl}/swagger/swagger-ui.css`, function (response) {
@@ -56,9 +62,14 @@ async function bootstrap() {
       console.log(
         `Swagger UI css file written to: '/swagger-static/swagger-ui.css'`,
       );
+    }).on('error', function (err) {
+      console.log('Error loading swagger-ui.css:', err);
     });
 
   }
 }
 
 bootstrap();
+console.log("im still getting on webbroser oading failed for the <script> with source “https://nest-6xd0nh75m-dartora.vercel.app/swagger/swagger-ui-bundle.js”. swagger:69:45");
+console.log("Loading failed for the <script> with source “https://nest-6xd0nh75m-dartora.vercel.app/swagger/swagger-ui-standalone-preset.js”. swagger:70:56");
+console.log("from vercel cerver");

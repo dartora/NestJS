@@ -16,8 +16,8 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  app.use("/", swaggerUI.serve, swaggerUI.setup(document, {
-    customCss: 'https://cdn.jsdelivr.net/webjars/org.webjars/swagger-ui/5.0.0/swagger-ui.css'
+  app.use("/api", swaggerUI.serve, swaggerUI.setup(document, {
+
   }));
 
   app.useGlobalPipes(new ValidationPipe());

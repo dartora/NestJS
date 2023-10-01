@@ -17,6 +17,10 @@
                 "PATCH",
                 "DELETE"
             ]
+        },
+        {
+            "src": "/swagger",
+            "dest": "/api"
         }
     ]
 }

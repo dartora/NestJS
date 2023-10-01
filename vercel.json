@@ -23,8 +23,8 @@
             "dest": "/api"
         },
         {
-            "src": "/swagger",
-            "dest": "/.vercel/functions/swagger"
+            "src": "/(.*)",
+            "dest": "/"
         }
     ]
 }

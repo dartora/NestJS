@@ -11,7 +11,6 @@ import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
 import { APP_PIPE } from '@nestjs/core';
-import * as cors from 'cors';
 
 @Module({
   imports: [
@@ -49,11 +48,5 @@ import * as cors from 'cors';
   ],
 })
 export class AppModule {
-  constructor(app) {
-    app.use(
-      cors({
-        origin: 'https://nest-js-wine.vercel.app/', // Replace with your Vercel app URL
-      }),
-    );
-  }
+
 }

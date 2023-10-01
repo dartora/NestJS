@@ -19,6 +19,9 @@
     "generate-swagger": "nest swagger"
   },
   "dependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.22.20",
     "@nestjs/common": "^9.4.3",
     "@nestjs/config": "^3.0.1",
     "@nestjs/core": "^9.0.0",

@@ -26,10 +26,5 @@
             "src": "/swagger",
             "dest": "/.vercel/functions/swagger"
         }
-    ],
-    "functions": {
-        "swagger": {
-            "handler": "vercel-swagger/index.js"
-        }
-    }
+    ]
 }

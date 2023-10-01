@@ -17,13 +17,6 @@
                 "PATCH",
                 "DELETE"
             ]
-        },
-        {
-            "src": "/api(.*)",
-            "dest": "node_modules/swagger-ui-dist",
-            "headers": {
-                "cache-control": "public, max-age=31536000, immutable"
-            }
         }
     ]
 }

@@ -17,7 +17,7 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   app.use("/", swaggerUI.serve, swaggerUI.setup(document, {
-    customCss: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css'
+    customCss: 'https://cdn.jsdelivr.net/webjars/org.webjars/swagger-ui/5.0.0/swagger-ui.css'
   }));
 
   app.useGlobalPipes(new ValidationPipe());

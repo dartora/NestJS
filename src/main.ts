@@ -16,7 +16,8 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/api', app, document);
+  const swaggerUI = require('swagger-ui-express');
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(document));
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }

@@ -12,10 +12,16 @@ describe("AppController", () => {
     }).compile();
   });
 
+
+
   describe("getHello", () => {
-    it('should return "Hello Worldd!"', () => {
+    it('should return "Hello Worldz!"', () => {
+
+      const date = new Date();
+      let saoPauloTime = date.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" });
+
       const appController = app.get(AppController);
-      expect(appController.getHello()).toBe("Hello Worldd!" + new Date());
+      expect(appController.getHello()).toBe("Hello Worldd!" + saoPauloTime);
     });
   });
 });

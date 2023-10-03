@@ -9,7 +9,6 @@ import swaggerJsDoc from 'swagger-jsdoc';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  app.use(morgan("dev"));
   const options = {
     definition: {
       openapi: "3.0.0",

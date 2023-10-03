@@ -3,10 +3,14 @@ import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getDeployInfo(): string {
+    return `
+      Deployment URL: ${process.env.VERCEL_URL}
+      Git Commit SHA: ${process.env.VERCEL_GIT_COMMIT_SHA}
+      Environment: ${process.env.VERCEL_ENV}
+    `;
   }
 }

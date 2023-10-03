@@ -8,9 +8,9 @@ export class AppController {
   @Get()
   getDeployInfo(): string {
     return `
-      Deployment URL: ${process.env.VERCEL_URL}
-      Git Commit SHA: ${process.env.VERCEL_GIT_COMMIT_SHA}
-      Environment: ${process.env.VERCEL_ENV}
+      <p>Deployment URL: ${process.env.VERCEL_URL}</p>
+      <p>Git Commit SHA: ${process.env.VERCEL_GIT_COMMIT_SHA}</p>
+      <p>Environment: ${process.env.VERCEL_ENV}</p>
     `;
   }
 }

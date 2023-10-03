@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello Worldd!' + new Date();
+    let date = new Date();
+    let saoPauloTime = date.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" });
+    return 'Hello Worldd!' + saoPauloTime;
   }
 }

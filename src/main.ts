@@ -3,12 +3,13 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import swaggerUI from "swagger-ui-express";
-
+import morgan from 'morgan';
 import swaggerJsDoc from 'swagger-jsdoc';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
+  app.use(morgan("dev"));
   const options = {
     definition: {
       openapi: "3.0.0",

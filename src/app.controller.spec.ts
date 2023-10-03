@@ -13,9 +13,9 @@ describe("AppController", () => {
   });
 
   describe("getHello", () => {
-    it('should return "Hello World!"', () => {
+    it('should return "Hello Worldd!"', () => {
       const appController = app.get(AppController);
-      expect(appController.getHello()).toBe("Hello Worldd!");
+      expect(appController.getHello()).toBe("Hello Worldd!" new Date());
     });
   });
 });

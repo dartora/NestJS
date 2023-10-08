@@ -16,17 +16,17 @@ import { User } from "./entities/user.entity";
 
 @Controller("users")
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(private readonly userService: UsersService) { }
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return await this.userService.createUser(createUserDto);
   }
 
   @UseGuards(AuthGuard)
   @Get()
-  findAll() {
-    return this.userService.findAllUsers();
+  async findAll(): Promise<User[]> {
+    return await this.userService.findAllUsers();
   }
 
   @UseGuards(AuthGuard)
@@ -37,19 +37,19 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Get(":id")
-  findOne(@Param("id") id: string) {
-    return this.userService.viewUser(+id);
+  async findOne(@Param("id") id: number): Promise<User> {
+    return await this.userService.viewUser(id);
   }
 
   @UseGuards(AuthGuard)
   @Patch(":id")
-  update(@Param("id") id: number, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.updateUser(id, updateUserDto);
+  async update(@Param("id") id: number, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+    return await this.userService.updateUser(id, updateUserDto);
   }
 
   @UseGuards(AuthGuard)
   @Delete(":id")
-  remove(@Param("id") id: string) {
-    return this.userService.removeUser(+id);
+  async remove(@Param("id") id: number): Promise<{ affected?: number; }> {
+    return await this.userService.removeUser(id);
   }
 }

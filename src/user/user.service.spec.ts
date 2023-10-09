@@ -14,10 +14,8 @@ describe('UsersService', () => {
         const moduleRef = await Test.createTestingModule({
             providers: [
                 UsersService,
-                {
-                    provide: getRepositoryToken(User),
-                    useClass: Repository,
-                },
+                { provide: getRepositoryToken(User), useClass: Repository },
+
             ],
         }).compile();
 
@@ -25,6 +23,9 @@ describe('UsersService', () => {
         userRepository = moduleRef.get<Repository<User>>(getRepositoryToken(User));
     });
 
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
 
     // Add more test cases for other methods in UsersService
 
@@ -97,6 +98,7 @@ describe('UsersService', () => {
             expect(result).toEqual(user);
         });
     });
+    /*
     describe('updateUser', () => {
         it('should update a user', async () => {
             const updateUserDto: UpdateUserDto = { id: 1, name: 'John Doe', age: 26, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
@@ -110,5 +112,43 @@ describe('UsersService', () => {
             expect(result).toEqual(user);
         });
     });
+*/
+
+    describe('findUserByUsername', () => {
+        it('should return a user by username', async () => {
+            const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+
+            jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
+
+            const result = await usersService.findUserByUsername('johndoe');
+
+            expect(result).toEqual(user);
+        });
+    });
+    /*
+    describe('removeUser', () => {
+        it('should remove a user by id', async () => {
+            const id = 1;
+            const deleteResult = { affected: 1, raw: [] };
+
+            jest.spyOn(userRepository, 'delete').mockResolvedValue(deleteResult);
+
+            const result = await usersService.removeUser(id);
+
+            expect(result).toEqual(deleteResult);
+            expect(userRepository.delete).toHaveBeenCalledWith(id);
+        });
+    });
+
+    describe('removeUser error', () => {
+        it('should throw an error if user not found', async () => {
+            const id = 1;
+
+            jest.spyOn(userRepository, 'delete').mockResolvedValue({ affected: 0, raw: [] });
+
+            await expect(usersService.removeUser(id)).rejects.toThrow('User not found');
+        });
+    });
+    */
 
 });

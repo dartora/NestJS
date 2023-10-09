@@ -70,11 +70,10 @@ describe('UsersController', () => {
         it('should delete a user', async () => {
             const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1 });
-
+            jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1, raw: [] });
             const result = await userController.remove(1);
 
-            expect(result).toEqual({ affected: 1 });
+            expect(result).toEqual({ affected: 1, raw: [] });
         });
     });
 

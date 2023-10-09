@@ -11,11 +11,11 @@ export class UsersService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) { }
 
-  createUser(createUserDto: CreateUserDto): Promise<User> {
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
     return this.userRepository.save(createUserDto);
   }
 
-  findAllUsers(): Promise<User[]> {
+  async findAllUsers(): Promise<User[]> {
     return this.userRepository.find();
   }
 
@@ -33,21 +33,29 @@ export class UsersService {
     });
   }
 
-  viewUser(id: number): Promise<User> {
+  async viewUser(id: number): Promise<User> {
     return this.userRepository.findOneBy({ id });
   }
 
-  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<any> {
-    return this.userRepository.update(id, updateUserDto);
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
+    const userToUpdate = await this.userRepository.findOne({ where: { id } });
+    if (!userToUpdate) {
+      throw new Error('User not found');
+    }
+    if (userToUpdate === null) {
+      throw new Error('User not found');
+    }
+    const updatedUser = this.userRepository.create({ ...userToUpdate, ...updateUserDto });
+    await this.userRepository.save(updatedUser);
+    return updatedUser;
   }
 
-  removeUser(id: number): Promise<{ affected?: number }> {
+  async removeUser(id: number): Promise<{ affected?: number }> {
     return this.userRepository.delete(id);
   }
 
-  async findOne(username: string): Promise<User> {
-    return (await this.findAllUsers()).find(
-      (user) => user.username === username,
-    );
+  async findUserByUsername(username: string): Promise<User> {
+    const allUsers = await this.findAllUsers();
+    return allUsers.find(user => user.username === username);
   }
 }

@@ -95,9 +95,9 @@ describe('UsersController', () => {
     describe('update', () => {
         it('should update a user', async () => {
             const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
-            const updateUser: UpdateUserDto = { id: 1, name: 'John Doe Updated', age: 26, gender: 'male', username: 'johndoeupdated', email: 'johndoeupdated@example.com', password: '1234' };
+            const updateUser: UpdateUserDto = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'updateUser').mockResolvedValue(updateUser);
+            jest.spyOn(usersService, 'updateUser').mockResolvedValue(user);
 
             const result = await userController.update(1, updateUser);
 

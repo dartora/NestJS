@@ -33,6 +33,6 @@ export class PostController {
   @UseGuards(AuthGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
-    return await this.postService.remove(id);
+    return this.postService.remove(id);
   }
 }

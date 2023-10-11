@@ -10,6 +10,7 @@ import { User } from 'src/user/entities/user.entity';
 describe('PostController', () => {
     let controller: PostController;
     let user: User;
+    let postService: PostService;
 
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
@@ -24,6 +25,7 @@ describe('PostController', () => {
         }).compile();
 
         controller = module.get<PostController>(PostController);
+        postService = module.get<PostService>(PostService);
         user = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
     });
@@ -42,7 +44,7 @@ describe('PostController', () => {
             user: user,
         };
 
-        jest.spyOn(controller, 'create').mockResolvedValue(post);
+        jest.spyOn(postService, 'create').mockResolvedValue(post);
 
         const result = await controller.create(post);
 
@@ -67,7 +69,7 @@ describe('PostController', () => {
             },
         ];
 
-        jest.spyOn(controller, 'findAll').mockResolvedValue(posts);
+        jest.spyOn(postService, 'findAll').mockResolvedValue(posts);
 
         const result = await controller.findAll();
 
@@ -83,7 +85,7 @@ describe('PostController', () => {
             user: user,
         };
 
-        jest.spyOn(controller, 'findOne').mockResolvedValue(post);
+        jest.spyOn(postService, 'findOne').mockResolvedValue(post);
 
         const result = await controller.findOne(1);
 
@@ -99,20 +101,21 @@ describe('PostController', () => {
             user: user,
         };
 
-        jest.spyOn(controller, 'update').mockResolvedValue(post);
+        const updateSpy = jest.spyOn(postService, 'update').mockResolvedValue(post);
 
         const result = await controller.update(1, post);
 
+        expect(updateSpy).toHaveBeenCalledWith(1, post);
         expect(result).toEqual(post);
     });
+
     it('should delete a post', async () => {
-        const postId = 1;
+        const postId = 33;
 
-        jest.spyOn(controller, 'remove').mockResolvedValue({ affected: 1 });
+        const removeSpy = jest.spyOn(postService, 'remove').mockImplementation(() => Promise.resolve());
 
-        const result = await controller.remove(postId);
+        await controller.remove(postId);
 
-        expect(result).toEqual({ affected: 1 });
+        expect(removeSpy).toHaveBeenCalledWith(postId);
     });
-
 });

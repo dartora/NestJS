@@ -60,14 +60,7 @@ describe('UsersController', () => {
 
         expect(result).toEqual(user);
     });
-    it('remove should delete a user', async () => {
-        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-        jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1, raw: [] });
-        const result = await userController.remove(1);
-
-        expect(result).toEqual({ affected: 1, raw: [] });
-    });
 
     it('findAllUsersWithPosts should return an array of users with their posts', async () => {
         const users: User[] = [
@@ -92,4 +85,14 @@ describe('UsersController', () => {
         expect(result).toEqual(updateUser);
     });
 
+    it('remove should delete a user', async () => {
+        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+
+        const removeUserSpy = jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1, raw: [] });
+
+        const result = await userController.remove(1);
+
+        expect(removeUserSpy).toHaveBeenCalledWith(1);
+        expect(result).toEqual({ affected: 1, raw: [] });
+    });
 });

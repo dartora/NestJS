@@ -81,7 +81,7 @@ describe('UsersService', () => {
     it('should return a user by id', async () => {
         const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-        jest.spyOn(usersService, 'viewUser').mockResolvedValue(user);
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
 
         const result = await usersService.viewUser(1);
 
@@ -103,7 +103,7 @@ describe('UsersService', () => {
     it('should return a user by username', async () => {
         const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-        jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
+        jest.spyOn(userRepository, 'findOneBy').mockResolvedValue(user);
 
         const result = await usersService.findUserByUsername('johndoe');
 
@@ -111,19 +111,20 @@ describe('UsersService', () => {
     });
     /*
     describe('removeUser', () => {
-        it('should remove a user by id', async () => {
-            const id = 1;
-            const deleteResult = { affected: 1, raw: [] };
+        /*/
+    it('should remove a user by id', async () => {
+        const id = 1;
+        const deleteResult = { affected: 1, raw: [] };
 
-            jest.spyOn(userRepository, 'delete').mockResolvedValue(deleteResult);
+        jest.spyOn(userRepository, 'delete').mockResolvedValue(deleteResult);
 
-            const result = await usersService.removeUser(id);
+        const result = await usersService.removeUser(id);
 
-            expect(result).toEqual(deleteResult);
-            expect(userRepository.delete).toHaveBeenCalledWith(id);
-        });
+        expect(result).toEqual(deleteResult);
+        expect(userRepository.delete).toHaveBeenCalledWith(id);
     });
-
+});
+/*
     describe('removeUser error', () => {
         it('should throw an error if user not found', async () => {
             const id = 1;
@@ -134,5 +135,3 @@ describe('UsersService', () => {
         });
     });
     */
-
-});

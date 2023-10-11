@@ -3,6 +3,7 @@ import { Post } from "./entities/post.entity";
 import { PostService } from "./post.service";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { Test } from "@nestjs/testing";
+import { UpdatePostDto } from "./dto/update-post.dto";
 
 describe('PostService', () => {
   let postService: PostService;
@@ -104,6 +105,13 @@ describe('PostService', () => {
     const result = await postService.findOne(1);
 
     expect(result).toEqual(post);
+  });
+
+  it('should remove a post', async () => {
+    jest.spyOn(postRepository, 'delete').mockResolvedValue({ affected: 1, raw: [] });
+    await postService.remove(1);
+
+    expect(postRepository.delete).toHaveBeenCalledWith(1);
   });
 
 });

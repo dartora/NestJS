@@ -100,14 +100,32 @@ describe('UsersService', () => {
         expect(result).toEqual(user);
     });
     */
-    it('should return a user by username', async () => {
-        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+    it('should update a user', async () => {
+        const user = new User();
+        user.id = 1;
 
-        jest.spyOn(userRepository, 'findOneBy').mockResolvedValue(user);
+        const updateUserDto = new UpdateUserDto();
+        updateUserDto.name = 'Updated Name';
 
-        const result = await usersService.findUserByUsername('johndoe');
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
+        jest.spyOn(userRepository, 'merge').mockImplementation((userToUpdate, dto) => {
+            const updatedUser = new User();
+            Object.assign(updatedUser, userToUpdate, dto);
+            return updatedUser;
+        });
+        jest.spyOn(userRepository, 'save').mockResolvedValue(user);
 
-        expect(result).toEqual(user);
+        const result = await usersService.updateUser(1, updateUserDto);
+        expect(result).toEqual({ ...user, ...updateUserDto });
+    });
+
+    it('should throw an error if user not found', async () => {
+        const updateUserDto = new UpdateUserDto();
+        updateUserDto.name = 'Updated Name';
+
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(undefined);
+
+        await expect(usersService.updateUser(1, updateUserDto)).rejects.toThrow();
     });
     /*
     describe('removeUser', () => {

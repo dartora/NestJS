@@ -34,11 +34,11 @@ export class UsersService {
   }
 
   async viewUser(id: number): Promise<User> {
-    return this.userRepository.findOneBy({ id });
+    return this.userRepository.findOne({ where: { id } });
   }
 
   async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
-    const userToUpdate = await this.userRepository.findOneBy({ id });
+    const userToUpdate = await this.userRepository.findOne({ where: { id } });
     if (!userToUpdate) {
       throw new NotFoundException('User not found');
     }

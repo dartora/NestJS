@@ -4,8 +4,6 @@ import { UpdatePostDto } from "./dto/update-post.dto";
 import { Repository } from "typeorm";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Post } from "./entities/post.entity";
-import { User } from "../user/entities/user.entity";
-import { UsersService } from "../user/user.service";
 
 @Injectable()
 export class PostService {
@@ -17,19 +15,19 @@ export class PostService {
     return this.postRepository.save(createPostDto);
   }
 
-  findAll() {
+  async findAll() {
     return this.postRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: number): Promise<Post> {
+    return this.postRepository.findOne({ where: { id } });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
+  async update(id: number, updatePostDto: UpdatePostDto) {
     return this.postRepository.save(updatePostDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: number): Promise<void> {
+    await this.postRepository.delete(id);
   }
 }

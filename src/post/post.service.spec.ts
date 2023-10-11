@@ -27,46 +27,12 @@ describe('PostService', () => {
     expect(postRepository).toBeDefined();
   });
 
-  describe('findAllPosts', () => {
-    it('should return an array of posts', async () => {
-      const posts = [
-        {
-          id: 2,
-          title: 'Post 2',
-          body: 'Content 2',
-          userId: 1,
-          user: {
-            id: 1,
-            username: 'user1',
-            email: 'user1@example.com',
-            age: 25,
-            password: '123',
-            gender: 'male',
-            name: 'User 1' // Add the name property
-
-          },
-          comments: [] // Add an empty array for comments
-        },
-      ];
-
-      jest.spyOn(postRepository, 'find').mockResolvedValue(posts);
-
-      const result = await postService.findAll();
-
-      expect(result).toEqual(posts);
-    });
-  });
-  describe('createPost', () => {
-    it('should create a post', async () => {
-      const createPostDto = {
-        title: 'Post 3',
-        body: 'Content 3',
-        userId: 1,
-      };
-      const post = {
-        id: 3,
-        title: 'Post 3',
-        body: 'Content 3',
+  it('should return an array of posts', async () => {
+    const posts = [
+      {
+        id: 2,
+        title: 'Post 2',
+        body: 'Content 2',
         userId: 1,
         user: {
           id: 1,
@@ -75,15 +41,69 @@ describe('PostService', () => {
           age: 25,
           password: '123',
           gender: 'male',
-          name: 'User 1',
+          name: 'User 1' // Add the name property
+
         },
-        comments: [],
-      };
-      jest.spyOn(postRepository, 'save').mockResolvedValue(post);
+        comments: [] // Add an empty array for comments
+      },
+    ];
 
-      const result = await postService.create(createPostDto);
+    jest.spyOn(postRepository, 'find').mockResolvedValue(posts);
 
-      expect(result).toEqual(post);
-    });
+    const result = await postService.findAll();
+
+    expect(result).toEqual(posts);
   });
+  it('should create a post', async () => {
+    const createPostDto = {
+      title: 'Post 3',
+      body: 'Content 3',
+      userId: 1,
+    };
+    const post = {
+      id: 3,
+      title: 'Post 3',
+      body: 'Content 3',
+      userId: 1,
+      user: {
+        id: 1,
+        username: 'user1',
+        email: 'user1@example.com',
+        age: 25,
+        password: '123',
+        gender: 'male',
+        name: 'User 1',
+      },
+      comments: [],
+    };
+    jest.spyOn(postRepository, 'save').mockResolvedValue(post);
+
+    const result = await postService.create(createPostDto);
+
+    expect(result).toEqual(post);
+  });
+  it('should find a post', async () => {
+    const post = {
+      id: 1,
+      title: 'Post 1',
+      body: 'Content 1',
+      userId: 1,
+      user: {
+        id: 1,
+        username: 'user1',
+        email: 'user1@example.com',
+        age: 25,
+        password: '123',
+        gender: 'male',
+        name: 'User 1',
+      },
+      comments: [],
+    };
+    jest.spyOn(postRepository, 'findOne').mockResolvedValue(post);
+
+    const result = await postService.findOne(1);
+
+    expect(result).toEqual(post);
+  });
+
 });

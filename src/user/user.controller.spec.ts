@@ -27,81 +27,69 @@ describe('UsersController', () => {
         usersService = moduleRef.get<UsersService>(UsersService);
     });
 
-    describe('findAll', () => {
-        it('should return an array of users', async () => {
-            const users: User[] = [
-                { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' },
-                { id: 2, name: 'Jane Smith', age: 30, gender: 'female', username: 'janesmith', email: 'janesmith@example.com', password: '123' },
-            ];
+    it('findAll should return an array of users', async () => {
+        const users: User[] = [
+            { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' },
+            { id: 2, name: 'Jane Smith', age: 30, gender: 'female', username: 'janesmith', email: 'janesmith@example.com', password: '123' },
+        ];
 
-            jest.spyOn(usersService, 'findAllUsers').mockResolvedValue(users);
+        jest.spyOn(usersService, 'findAllUsers').mockResolvedValue(users);
 
-            const result = await userController.findAll();
+        const result = await userController.findAll();
 
-            expect(result).toEqual(users);
-        });
+        expect(result).toEqual(users);
     });
 
     // Add more test cases for other methods in UserController
-    describe('findOne', () => {
-        it('should return a user', async () => {
-            const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+    it('findOne should return a user', async () => {
+        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'viewUser').mockResolvedValue(user);
+        jest.spyOn(usersService, 'viewUser').mockResolvedValue(user);
 
-            const result = await userController.findOne(1);
+        const result = await userController.findOne(1);
 
-            expect(result).toEqual(user);
-        });
+        expect(result).toEqual(user);
     });
 
-    describe('create', () => {
-        it('should create a user', async () => {
-            const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+    it('create should create a user', async () => {
+        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'createUser').mockResolvedValue(user);
+        jest.spyOn(usersService, 'createUser').mockResolvedValue(user);
 
-            const result = await userController.create(user);
+        const result = await userController.create(user);
 
-            expect(result).toEqual(user);
-        });
+        expect(result).toEqual(user);
     });
-    describe('remove', () => {
-        it('should delete a user', async () => {
-            const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+    it('remove should delete a user', async () => {
+        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1, raw: [] });
-            const result = await userController.remove(1);
+        jest.spyOn(usersService, 'removeUser').mockResolvedValue({ affected: 1, raw: [] });
+        const result = await userController.remove(1);
 
-            expect(result).toEqual({ affected: 1, raw: [] });
-        });
+        expect(result).toEqual({ affected: 1, raw: [] });
     });
 
-    describe('findAllUsersWithPosts', () => {
-        it('should return an array of users with their posts', async () => {
-            const users: User[] = [
-                { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123', posts: [] },
-                { id: 2, name: 'Jane Smith', age: 30, gender: 'female', username: 'janesmith', email: 'janesmith@example.com', password: '123', posts: [] },
-            ];
+    it('findAllUsersWithPosts should return an array of users with their posts', async () => {
+        const users: User[] = [
+            { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123', posts: [] },
+            { id: 2, name: 'Jane Smith', age: 30, gender: 'female', username: 'janesmith', email: 'janesmith@example.com', password: '123', posts: [] },
+        ];
 
-            jest.spyOn(usersService, 'findAllUsersWithPosts').mockResolvedValue(users);
+        jest.spyOn(usersService, 'findAllUsersWithPosts').mockResolvedValue(users);
 
-            const result = await userController.findAllUsersWithPosts();
+        const result = await userController.findAllUsersWithPosts();
 
-            expect(result).toEqual(users);
-        });
+        expect(result).toEqual(users);
     });
-    describe('update', () => {
-        it('should update a user', async () => {
-            const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
-            const updateUser: UpdateUserDto = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+    it('update should update a user', async () => {
+        const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
+        const updateUser: UpdateUserDto = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-            jest.spyOn(usersService, 'updateUser').mockResolvedValue(user);
+        jest.spyOn(usersService, 'updateUser').mockResolvedValue(user);
 
-            const result = await userController.update(1, updateUser);
+        const result = await userController.update(1, updateUser);
 
-            expect(result).toEqual(updateUser);
-        });
+        expect(result).toEqual(updateUser);
     });
 
 });

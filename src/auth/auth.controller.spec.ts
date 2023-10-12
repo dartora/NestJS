@@ -9,8 +9,12 @@ import { Repository } from 'typeorm';
 
 describe('AuthController', () => {
   let controller: AuthController;
+  let userRepositoryMock: any;
 
   beforeEach(async () => {
+    userRepositoryMock = {
+      findOne: jest.fn(),
+    };
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
       providers: [
@@ -18,7 +22,7 @@ describe('AuthController', () => {
         UsersService,
         {
           provide: getRepositoryToken(User),
-          useValue: Repository,
+          useValue: userRepositoryMock,
         },
       ],
       imports: [
@@ -34,5 +38,19 @@ describe('AuthController', () => {
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+  });
+
+  it('should return a JWT when credentials are valid', async () => {
+    userRepositoryMock.findOne.mockImplementation(() => Promise.resolve(new User({ password: 'test' })));
+    const signInDto = { username: 'test', password: 'test' };
+    const result = await controller.signIn(signInDto);
+    expect(result).toHaveProperty('access_token');
+    expect(typeof result.access_token).toBe('string');
+  });
+
+  it('should return user profile', async () => {
+    const req = { user: { username: 'test', password: 'test' } };
+    const result = await controller.getProfile(req);
+    expect(result).toEqual(req.user);
   });
 });

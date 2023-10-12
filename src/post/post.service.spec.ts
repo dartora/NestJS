@@ -114,4 +114,34 @@ describe('PostService', () => {
     expect(postRepository.delete).toHaveBeenCalledWith(1);
   });
 
+
+  it('should update a post', async () => {
+    const updatePostDto = {
+      title: 'Updated Post',
+      body: 'Updated Content',
+      userId: 1,
+
+    };
+    const post = {
+      id: 1,
+      title: 'Post 1',
+      body: 'Content 1',
+      userId: 1,
+      user: {
+        id: 1,
+        username: 'user1',
+        email: 'user1@example.com',
+        age: 25,
+        password: '123',
+        gender: 'male',
+        name: 'User 1',
+      },
+      comments: [],
+    };
+    jest.spyOn(postRepository, 'save').mockResolvedValue({ ...post, ...updatePostDto });
+
+    const result = await postService.update(1, updatePostDto);
+
+    expect(result).toEqual({ ...post, ...updatePostDto });
+  });
 });

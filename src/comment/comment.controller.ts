@@ -10,30 +10,30 @@ export class CommentController {
 
   @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto) {
-    return this.commentService.create(createCommentDto);
+  async create(@Body() createCommentDto: CreateCommentDto) {
+    return await this.commentService.create(createCommentDto);
   }
 
   @UseGuards(AuthGuard)
   @Get()
-  findAll() {
-    return this.commentService.findAll();
+  async findAll() {
+    return await this.commentService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    return await this.commentService.findOne(id);
   }
 
   @UseGuards(AuthGuard)
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentService.update(id, updateCommentDto);
+  async update(@Param('id') id: number, @Body() updateCommentDto: UpdateCommentDto) {
+    return await this.commentService.update(id, updateCommentDto);
   }
 
   @UseGuards(AuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(+id);
+  async remove(@Param('id') id: number) {
+    return await this.commentService.remove(id);
   }
 }

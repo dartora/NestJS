@@ -72,11 +72,13 @@ describe('UsersService', () => {
     it('should return a user by username', async () => {
         const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };
 
-        jest.spyOn(usersService, 'findUserByUsername').mockResolvedValue(user);
+        jest.spyOn(userRepository, 'findOne').mockResolvedValue(user);
 
         const result = await usersService.findUserByUsername('johndoe');
 
         expect(result).toEqual(user);
+        expect(userRepository.findOne).toHaveBeenCalledWith({ where: { username: 'johndoe' } });
+
     });
     it('should return a user by id', async () => {
         const user: User = { id: 1, name: 'John Doe', age: 25, gender: 'male', username: 'johndoe', email: 'johndoe@example.com', password: '123' };

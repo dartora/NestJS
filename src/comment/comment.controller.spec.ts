@@ -2,10 +2,11 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { CommentController } from "./comment.controller";
 import { CommentService } from "./comment.service";
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Repository, UpdateResult } from "typeorm";
 import { Comment } from "./entities/comment.entity";
 import { JwtModule } from "@nestjs/jwt";
 import { CreateCommentDto } from "./dto/create-comment.dto";
+import { UpdateCommentDto } from "./dto/update-comment.dto";
 
 describe('createComment', () => {
     let service: CommentService;
@@ -34,7 +35,7 @@ describe('createComment', () => {
         expect(commentController).toBeDefined();
         expect(repository).toBeDefined();
     });
-    it('should return an array of comments', async () => {
+    it('should return an array of comments - findAll', async () => {
         const comments = [
             {
                 id: 1,
@@ -95,16 +96,58 @@ describe('createComment', () => {
             email: 'john@example.com',
             body: 'Comment body',
         };
+
         const createdComment = {
+            ...comment,
+            id: 1,
+            post: null,
+        };
+
+        jest.spyOn(service, 'create').mockResolvedValue(createdComment);
+        const result = await commentController.create(comment);
+        expect(result).toEqual(createdComment);
+    });
+
+    it('should find a comment by id', async () => {
+        const comment = {
             id: 1,
             name: 'John Doe',
             email: 'john@example.com',
             body: 'Comment body',
             post: null,
         };
-        jest.spyOn(commentController, 'create').mockResolvedValue(createdComment);
-        expect(await commentController.create(comment)).toEqual(createdComment);
+
+        jest.spyOn(service, 'findOne').mockResolvedValue(comment);
+        const result = await commentController.findOne(1);
+        expect(result).toEqual(comment);
     });
 
+
+    it('should update a comment', async () => {
+        const updateCommentDto: UpdateCommentDto = {
+            name: 'Updated Name',
+            email: 'updated@example.com',
+            body: 'Updated comment body',
+            userId: 1
+        };
+
+        const updateResult: UpdateResult = {
+            raw: [],
+            affected: 1,
+            generatedMaps: []
+        };
+
+        jest.spyOn(service, 'update').mockResolvedValue(updateResult);
+        const result = await commentController.update(1, updateCommentDto);
+        expect(result).toEqual(updateResult);
+    });
+
+    it('should remove a comment', async () => {
+        const commentId = 1;
+
+        jest.spyOn(service, 'remove').mockResolvedValue({ affected: 1, raw: [] });
+        const result = await commentController.remove(commentId);
+        expect(result).toEqual({ affected: 1, raw: [] });
+    });
 });
 

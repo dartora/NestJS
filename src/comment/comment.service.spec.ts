@@ -154,18 +154,22 @@ describe('CommentService', () => {
           name: 'John Doe',
           username: 'johndoe',
           email: 'john@example.com',
-          age: 25, // add missing property
-          password: 'password123', // add missing property
-          gender: 'male', // add missing property
+          age: 25,
+          password: 'password123',
+          gender: 'male',
         },
       },
       userId: 1,
 
     };
-    jest.spyOn(repository, 'findOne').mockResolvedValueOnce(comment);
-    jest.spyOn(repository, 'save').mockResolvedValueOnce(comment);
-    const result = await service.create(comment);
-    expect(result).toEqual(comment);
+
+    const updateResult = { raw: [], affected: 1, generatedMaps: [] };
+    jest.spyOn(repository, 'update').mockResolvedValueOnce(updateResult);
+
+    const result = await service.update(1, comment);
+    expect(result).toEqual(updateResult);
+    expect(repository.update).toHaveBeenCalledWith(1, comment);
+    expect(result).toEqual(updateResult)
   });
   it('should delete a comment', async () => {
     const comment = {

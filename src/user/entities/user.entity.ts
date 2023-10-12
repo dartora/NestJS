@@ -31,4 +31,8 @@ export class User {
 
   @OneToMany(() => Post, (post) => post.user)
   posts?: Post[];
+
+  constructor(init?: Partial<User>) {
+    Object.assign(this, init);
+  }
 }

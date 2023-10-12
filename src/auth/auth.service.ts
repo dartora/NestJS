@@ -20,4 +20,3 @@ export class AuthService {
     };
   }
 }
-export class authService { }
